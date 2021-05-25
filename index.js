@@ -12,3 +12,31 @@ const refs = {
     buttonStop: document.querySelector('[data-action="stop"]'),
     body : document.body
 }
+
+let interval = null;
+
+refs.buttonStart.addEventListener('click', clickStartBtn);
+refs.buttonStop.addEventListener('click', clickStopBtn);
+
+
+
+const randomIntegerFromInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+
+function clickStartBtn() {
+  refs.buttonStart.setAttribute('disabled', true)
+
+  
+    interval = setInterval(() => {
+        const randomColor = randomIntegerFromInterval(0, colors.length);
+        refs.body.style.backgroundColor = colors[randomColor];
+       ;
+    }, 500);
+}
+
+function clickStopBtn() {
+    clearInterval(interval);
+    refs.buttonStart.removeAttribute('disabled')
+}
